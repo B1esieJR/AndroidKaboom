@@ -5,12 +5,12 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
    static private Vector2 _hitPoint;
-   
+    static private GameController explosion;
     // Start is called before the first frame update
     void Start()
     {
-       _hitPoint= GameObject.FindGameObjectWithTag("MainCamera").GetComponent<GameController>().LowerPoints;
-        
+       _hitPoint= Camera.main.GetComponent<GameController>().LowerPoints;
+      
     }
 
     // Update is called once per frame
@@ -19,6 +19,12 @@ public class Bomb : MonoBehaviour
         if (transform.position.y <= -_hitPoint.y)
         {
             Destroy(this.gameObject);
+            GameController explosion = Camera.main.GetComponent<GameController>();
+            explosion.bombDetonation();
+
+
         }
+        
+     
     }
 }
